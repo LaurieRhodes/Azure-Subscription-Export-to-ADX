@@ -1,0 +1,209 @@
+# Azure AD Data Export Function App - Git Ignore Rules
+
+## Azure Deployment Parameters
+# Protect actual deployment parameters containing sensitive information
+infrastructure/parameters.json
+infrastructure/parameters.*.json
+infrastructure/local.parameters.json
+infrastructure/dev.parameters.json
+infrastructure/prod.parameters.json
+infrastructure/test.parameters.json
+
+# Keep example parameters file visible
+!infrastructure/parameters.example.json
+
+## Azure Function App Files
+# Local settings and secrets
+local.settings.json
+*.local.settings.json
+local.settings.*.json
+
+# Function runtime and temp files
+bin/
+obj/
+.vs/
+.vscode/settings.json
+
+# Azure Function Core Tools
+.azure/
+.azurefunctions/
+
+## PowerShell and Development Files
+# PowerShell execution policy and profiles
+$PROFILE
+profile.ps1.user
+
+# Development and debugging
+.debug/
+debug.log
+*.log
+*.tmp
+
+# PowerShell module cache
+PSModuleCache/
+
+## Environment and Configuration Files
+# Environment variables and secrets
+.env
+.env.local
+.env.development
+.env.production
+*.env
+
+# Configuration files with secrets
+appsettings.local.json
+appsettings.Development.json
+appsettings.Production.json
+config.local.json
+secrets.json
+
+## Backup and Temporary Files
+# Backup files created during development
+*.backup
+*.bak
+*.orig
+*~
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Archive files that might contain sensitive data
+*.zip
+*.7z
+*.tar.gz
+*.rar
+
+## IDE and Editor Files
+# Visual Studio Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# JetBrains IDEs
+.idea/
+
+## Operating System Files
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Linux
+*~
+.nfs*
+
+## Azure and Deployment Artifacts
+# ARM template outputs that might contain sensitive data
+outputs.json
+deployment.output.json
+
+# Terraform files (if used)
+*.tfstate
+*.tfstate.backup
+.terraform/
+terraform.tfvars
+*.auto.tfvars
+
+# Bicep compiled files that might contain sensitive data
+*.compiled.json
+
+## Testing and Development Data
+# Test data files that might contain real AAD data
+testdata/
+sample-data/
+export-samples/
+
+# Performance testing results
+performance-results/
+load-test-results/
+
+## Security and Certificates
+# Certificate files
+*.pfx
+*.p12
+*.cer
+*.crt
+*.key
+*.pem
+
+# SSH keys
+id_rsa
+id_dsa
+*.ssh
+
+## Documentation Build Artifacts
+# Generated documentation
+docs/build/
+docs/_build/
+site/
+
+## Node.js (if used for tooling)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## Python (if used for tooling)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+venv/
+env/
+
+## Additional Protection Patterns
+# Any file with 'secret', 'key', or 'password' in the name
+*secret*
+*key*
+*password*
+*credential*
+
+# Exclude any local override files
+*.local.*
+*.override.*
+
+## Project Specific Exclusions
+# Function App specific temporary files
+host.json.backup
+profile.ps1.backup
+
+# Export data and logs (prevent accidental commit of actual AAD data)
+exports/
+export-data/
+aad-export-*.json
+user-data-*.json
+group-data-*.json
+
+# Application Insights connection strings or keys in standalone files
+applicationinsights.json
+appinsights.config
+
+## Keep Important Files (Override exclusions)
+# Ensure important template and example files remain visible
+!infrastructure/parameters.example.json
+!infrastructure/*.template.json
+!infrastructure/*.example.json
+!docs/**/*.md
+!src/**/*.ps1
+!src/**/*.json
+!README.md
+!LICENSE

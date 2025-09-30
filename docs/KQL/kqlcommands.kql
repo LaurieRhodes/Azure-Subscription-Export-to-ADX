@@ -1,0 +1,43 @@
+
+.create-merge table AzureResourceRaw (records:dynamic)
+
+
+.alter-merge table AzureResourceRaw policy retention softdelete = 1d
+
+.alter table AzureResourceRaw policy caching hot = 1h
+
+// JSON mapping - choose appropriate option based on data structure
+.create-or-alter table AzureResourceRaw ingestion json mapping 'AzureResourceRawMapping' '[{"column":"records","Properties":{"path":"$"}}]'
+
+
+.create-merge table AzureResource (
+    TimeGenerated: datetime,
+    Id: string ,
+    ResourceType: string ,
+    Name: string ,
+    Properties: dynamic,
+    ExportId: guid,
+    _TimeReceived:datetime
+)
+
+
+
+.create-or-alter function AzureResourceExpand() {
+  AzureResourceRaw
+  | extend events = records
+  | project 
+  TimeGenerated = todatetime(now()),
+  Id = tostring(events.Data.id),
+  ResourceType = tostring(events.Data.type),
+  Name = tostring(events.Data.name),
+  Properties = todynamic(events.Data.properties),
+  ExportId = toguid(events.ExportId),
+  _TimeReceived = todatetime(now())
+  }
+
+.alter table AzureResource policy update @'[{"Source": "AzureResourceRaw", "Query": "AzureResourceExpand()", "IsEnabled": "false", "IsTransactional": true}]'
+
+.alter table AzureResource policy update @'[{"Source": "AzureResourceRaw", "Query": "AzureResourceExpand()", "IsEnabled": "true", "IsTransactional": true}]'
+
+
+

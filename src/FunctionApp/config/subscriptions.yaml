@@ -1,0 +1,90 @@
+# Azure Subscription Export Configuration
+# This file defines which subscriptions and resources to export
+
+metadata:
+  version: "1.0"
+  description: "Azure Subscription Export Configuration"
+  lastUpdated: "2025-01-31"
+  owner: "Enterprise IT"
+
+# Subscription Configuration
+subscriptions:
+  # Primary subscription - your initial target
+  - id: "12345678-1234-1234-1234-123456789012"
+    name: "Production Primary"
+    description: "Main production environment"
+    enabled: true
+    priority: 1
+    
+  # Example additional subscriptions (commented out)
+  # - id: "12345678-1234-1234-1234-123456789012"
+  #   name: "Production Secondary"
+  #   description: "Secondary production environment"
+  #   enabled: true
+  #   priority: 2
+  #   
+  # - id: "87654321-4321-4321-4321-210987654321"
+  #   name: "Development"
+  #   description: "Development environment"
+  #   enabled: false
+  #   priority: 3
+  #   
+  # - id: "abcdefgh-abcd-abcd-abcd-abcdefghijkl"
+  #   name: "Staging"
+  #   description: "Staging environment"
+  #   enabled: true
+  #   priority: 4
+
+# Export Configuration
+exportSettings:
+  # Resource types to export
+  subscriptionObjects: true
+  roleDefinitions: false
+  resourceGroupDetails: true
+  roleAssignments: true
+  policyDefinitions: false
+  policyAssignments: false
+  policyExemptions: false
+  securityCenterSubscriptions: false
+  includeChildResources: true
+  
+  # Performance settings
+  batchSizes:
+    resources: 50
+    resourceGroups: 25
+    childResources: 30
+    
+  # Retry settings
+  retryPolicy:
+    maxRetries: 3
+    retryDelaySeconds: 2
+    exponentialBackoff: true
+
+# Resource Group Filters (optional)
+# If specified, only these resource groups will be exported
+# Leave empty or comment out to export all resource groups
+resourceGroupFilters:
+  # Examples:
+  # - "rg-production-web"
+  # - "rg-production-data"
+  # - "rg-shared-services"
+
+# Resource Type Exclusions (optional)
+# Resource types to skip during export
+resourceTypeExclusions:
+  - "Microsoft.Resources/deployments"
+  - "Microsoft.Resources/deploymentScripts"
+  
+# Advanced Settings
+advanced:
+  # Enable detailed telemetry
+  verboseTelemetry: true
+  
+  # Enable performance profiling
+  enableProfiling: false
+  
+  # Custom tags to add to exported data
+  customTags:
+    exportSource: "FunctionApp"
+    environment: "production"
+    dataClassification: "internal"

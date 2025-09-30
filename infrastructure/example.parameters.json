@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "Australia SouthEast"
+    },
+    "resourceGroupID": {
+      "value": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}"
+    },
+    "functionAppName": {
+      "value": "userandgroupexporttoadx"
+    },
+    "storageAccountName": {
+      "value": "userandgroupexport111"
+    },
+    "applicationInsightsName": {
+      "value": "userandgroupexporttoadx"
+    },
+    "userAssignedIdentityResourceId": {
+      "value": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}"
+    },
+    "eventHubNamespace": {
+      "value": "securityeventdestination"
+    },
+    "eventHubName": {
+      "value": "aadgraph"
+    }
+  }
+}

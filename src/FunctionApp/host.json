@@ -1,0 +1,48 @@
+{
+  "version": "2.0",
+  "functionTimeout": "00:10:00",
+  "healthMonitor": {
+      "enabled": true,
+      "healthCheckInterval": "00:00:10",
+      "healthCheckWindow": "00:02:00",
+      "healthCheckThreshold": 6,
+      "counterThreshold": 0.80
+  },
+  "managedDependency": {
+    "enabled": true
+  },
+  "extensionBundle": {
+      "id": "Microsoft.Azure.Functions.ExtensionBundle",
+      "version": "[4.*, 5.0.0)"
+  },
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "maxTelemetryItemsPerSecond": 10,
+        "excludedTypes": "Request"
+      },
+      "enableLiveMetricsFilters": true,
+      "httpAutoCollectionOptions": {
+        "enableHttpTriggerExtendedInfoCollection": true,
+        "enableW3CDistributedTracing": true,
+        "enableResponseHeaderInjection": true
+      }
+    },
+    "logLevel": {
+      "default": "Information",
+      "Function": "Information",
+      "Function.TimerTriggerFunction": "Information",
+      "Function.HttpTriggerFunction": "Information",
+      "Host.Results": "Information",
+      "Host.Aggregator": "Trace",
+      "Microsoft.Azure.WebJobs.Extensions.Timers": "Information"
+    }
+  },
+  "retry": {
+    "strategy": "exponentialBackoff",
+    "maxRetryCount": 3,
+    "minimumInterval": "00:00:02",
+    "maximumInterval": "00:00:30"
+  }
+}
